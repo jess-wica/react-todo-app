@@ -9,15 +9,15 @@ import Todo from './Todo';
 library.add(faTrash, faPlus);
 
 const testData = [
-  { task: "Walk dog", complete: false },
-  { task: "Study React", complete: false }
+  { id: 1, task: "Walk dog", complete: false },
+  { id: 2, task: "Study React", complete: false }
 ];
 
 const TodoList = (props) => (
   <div className="container-fluid py-3">
     <h2>My List</h2>
     <div className="col-md-auto list-group">
-      {props.todoTasks.map(todoTask => <Todo {...todoTask} />)}
+      {props.todoTasks.map(todoTask => <Todo {...todoTask} key={todoTask.id} />)}
     </div>
   </div>
 );
@@ -29,6 +29,7 @@ class App extends Component {
   //     todoTasks: testData,
   //   };
 
+  // This is a shorter way of doing the same as above
   state = {
     todoTasks: testData,
   };
