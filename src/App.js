@@ -17,7 +17,7 @@ const TodoList = (props) => (
   <div className="container-fluid py-3">
     <h2>My List</h2>
     <div className="col-md-auto list-group">
-      {props.todoTasks.map(todoTask => <Todo {...todoTask} key={todoTask.id} />)}
+      {props.todoTasks.map(todoTask => <Todo key={todoTask.id} {...todoTask} />)}
     </div>
   </div>
 );
@@ -31,14 +31,29 @@ class App extends Component {
 
   // This is a shorter way of doing the same as above
   state = {
-    todoTasks: testData,
+    todoTasks: testData, ...[],
+  };
+
+  addNewTodo = (e) => {
+    if (this.state.taskInput !== "") {
+      let newToDo = {
+        id: Date.now(),
+        task: this.state.taskInput,
+        complete: false,
+      }
+      this.setState(prevState => ({
+        toDoTasks: [...prevState.todoTasks, newToDo],
+      }));
+    }
+
+    e.preventDefault();
   };
 
   render() {
     return (
       <div className="container-fluid">
         <h1>My To Do List</h1>
-        <TodoForm />
+        <TodoForm onSubmit={this.addNewTodo} />
         <TodoList todoTasks={this.state.todoTasks} />
       </div>
     )
