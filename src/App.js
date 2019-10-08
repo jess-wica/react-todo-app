@@ -14,7 +14,7 @@ const testData = [
 ];
 
 const TodoList = (props) => (
-  <div>
+  <div className="container-fluid py-3">
     <h2>My List</h2>
     <div className="col-md-auto list-group">
       {testData.map(todoTask => <Todo {...todoTask} />)}
