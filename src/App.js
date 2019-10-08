@@ -12,8 +12,7 @@ const TodoList = (props) => (
   <div>
     <h2>My List</h2>
     <ul>
-      <Todo {...testData[0]} />
-      <Todo {...testData[1]} />
+      {testData.map(todoTask => <Todo {...todoTask} />)}
     </ul>
   </div>
 );
