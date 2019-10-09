@@ -9,7 +9,7 @@ class TodoForm extends Component {
         event.preventDefault();
         this.props.onSubmit({
             id: shortid.generate(),
-            task: this.state.text,
+            task: this.state.taskInput,
             complete: false
         });
         this.setState({

@@ -46,6 +46,7 @@ class App extends Component {
         <h1>My To Do List</h1>
         <TodoForm onSubmit={this.addNewTodo} />
         <TodoList todoTasks={this.state.todoTasks} />
+        {JSON.stringify(this.state.todoTasks)}
       </div>
     )
   }
