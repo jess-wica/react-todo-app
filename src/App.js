@@ -8,10 +8,10 @@ import Todo from './Todo';
 
 library.add(faTrash, faPlus);
 
-const testData = [
-  { id: 1, task: "Walk dog", complete: false },
-  { id: 2, task: "Study React", complete: false }
-];
+// const testData = [
+//   { id: 1, task: "Walk dog", complete: false },
+//   { id: 2, task: "Study React", complete: false }
+// ];
 
 const TodoList = (props) => (
   <div className="container-fluid py-3">
@@ -31,22 +31,13 @@ class App extends Component {
 
   // This is a shorter way of doing the same as above
   state = {
-    todoTasks: testData, ...[],
+    todoTasks: [],
   };
 
-  addNewTodo = (e) => {
-    if (this.state.taskInput !== "") {
-      let newToDo = {
-        id: Date.now(),
-        task: this.state.taskInput,
-        complete: false,
-      }
-      this.setState(prevState => ({
-        toDoTasks: [...prevState.todoTasks, newToDo],
-      }));
-    }
-
-    e.preventDefault();
+  addNewTodo = (todo) => {
+    this.setState({
+      todoTasks: [todo, ...this.state.todoTasks]
+    });
   };
 
   render() {

@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import shortid from 'shortid';
 
 class TodoForm extends Component {
     state = { taskInput: '' };
-    // handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     console.log(this.state.taskInput);
-    //     this.props.addNewTodo(this.state.taskInput);
-    //     this.setState({
-    //         taskInput: '',
-    //     });
-    // }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.props.onSubmit({
+            id: shortid.generate(),
+            task: this.state.text,
+            complete: false
+        });
+        this.setState({
+            taskInput: event.target.value,
+        });
+    }
     render() {
         return (
             <div className="py-3">
-                <form onSubmit={this.addNewTodo} >
+                <form onSubmit={this.handleSubmit} >
                     <input
                         type="text"
+                        name="taskInput"
                         className="rounded"
-                        value={this.state.todoTask}
-                        onChange={event => this.setState({ taskInput: event.target.value })}
+                        value={this.state.taskInput}
+                        onChange={event => this.setState({ [event.target.name]: event.target.value })}
                         placeholder="Enter task..."
                         required />
                     <button type="submit" className="rounded">
