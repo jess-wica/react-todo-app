@@ -42,7 +42,6 @@ class App extends Component {
         <h1>My To Do List</h1>
         <TodoForm onSubmit={this.addNewTodo} />
         {haveTodos ? null : <TodoList todoTasks={this.state.todoTasks} />}
-        {/* <TodoList todoTasks={this.state.todoTasks} /> */}
       </div>
     )
   }
