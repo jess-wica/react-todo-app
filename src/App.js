@@ -8,11 +8,6 @@ import Todo from './Todo';
 
 library.add(faTrash, faPlus);
 
-// const testData = [
-//   { id: 1, task: "Walk dog", complete: false },
-//   { id: 2, task: "Study React", complete: false }
-// ];
-
 const TodoList = (props) => (
   <div className="container-fluid py-3">
     <h2>My List</h2>
@@ -41,12 +36,13 @@ class App extends Component {
   };
 
   render() {
+    const haveTodos = (this.state.todoTasks === undefined || this.state.todoTasks < 1);
     return (
       <div className="container-fluid">
         <h1>My To Do List</h1>
         <TodoForm onSubmit={this.addNewTodo} />
-        <TodoList todoTasks={this.state.todoTasks} />
-        {JSON.stringify(this.state.todoTasks)}
+        {haveTodos ? null : <TodoList todoTasks={this.state.todoTasks} />}
+        {/* <TodoList todoTasks={this.state.todoTasks} /> */}
       </div>
     )
   }

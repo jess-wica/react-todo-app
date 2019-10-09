@@ -9,9 +9,7 @@ class Todo extends Component {
                 <div className="col-9">
                     <div className="col-8">
                         <input className="form-check-input" type="checkbox" />
-                        <label
-                            style={{ textDecoration: todoTask.complete ? "line-through" : "" }}
-                        >
+                        <label>
                             {todoTask.task}
                         </label>
                     </div>

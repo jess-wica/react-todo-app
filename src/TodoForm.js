@@ -13,7 +13,7 @@ class TodoForm extends Component {
             complete: false
         });
         this.setState({
-            taskInput: event.target.value,
+            taskInput: ''
         });
     }
     render() {
