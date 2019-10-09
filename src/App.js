@@ -41,7 +41,9 @@ class App extends Component {
       <div className="container-fluid">
         <h1>My To Do List</h1>
         <TodoForm onSubmit={this.addNewTodo} />
-        {haveTodos ? null : <TodoList todoTasks={this.state.todoTasks} />}
+        {haveTodos ?
+          <p>Add something to do!</p> :
+          <TodoList todoTasks={this.state.todoTasks} />}
       </div>
     )
   }
