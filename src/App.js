@@ -4,23 +4,23 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import TodoForm from './TodoForm';
-import Todo from './Todo';
+import TodoList from './TodoList';
+// import Todo from './Todo';
 
 library.add(faTrash, faPlus);
 
-const TodoList = (props) => (
-  <div className="container-fluid py-3">
-    <h2>My List</h2>
-    <div className="col-md-auto list-group">
-      {props.todoTasks.map(todoTask =>
-        <Todo
-          key={todoTask.id}
-          toggleChecked={() => this.toggleChecked(todoTask.id)}
-          deleteToDo={() => this.deleteToDo(todoTask.id)}
-          {...todoTask} />)}
-    </div>
-  </div>
-);
+// const TodoList = (props) => (
+//   <div className="container-fluid py-3">
+//     <h2>My List</h2>
+//     <div className="col-md-auto list-group">
+//       {props.todoTasks.map(todoTask =>
+//         <Todo
+//           key={todoTask.id}
+//           {...todoTask}
+//         />)}
+//     </div>
+//   </div>
+// );
 
 class App extends Component {
   // constructor(props) {
@@ -56,10 +56,13 @@ class App extends Component {
   };
 
   deleteToDo = (id) => {
-    this.setState({
-      todoTasks: this.state.todoTasks.filter(todoTask => todoTask.id !== id)
-    });
-    console.log(id);
+    // this.setState({
+    //   todoTasks: this.state.todoTasks.filter(todoTask => todoTask.id !== id)
+    // });
+    const todoTasks = this.state.todoTasks.filter(todo => {
+      return todo.id !== id
+    })
+    this.setState({ todoTasks })
   }
 
   render() {
@@ -70,7 +73,11 @@ class App extends Component {
         <TodoForm onSubmit={this.addNewTodo} />
         {haveTodos ?
           <p>Add something to do!</p> :
-          <TodoList todoTasks={this.state.todoTasks} />}
+          <TodoList
+            todoTasks={this.state.todoTasks}
+            deleteToDo={this.deleteToDo}
+            callback={this.toggleChecked}
+          />}
       </div>
     )
   }

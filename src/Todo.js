@@ -11,7 +11,8 @@ class Todo extends Component {
                         <input
                             className="form-check-input"
                             type="checkbox"
-                            onChange={todoTask.toggleChecked}
+                            checked={todoTask.complete}
+                            onChange={() => this.props.callback(this.props.todoTask)}
                         />
                         <label
                             style={{
@@ -21,8 +22,9 @@ class Todo extends Component {
                         </label>
                     </div>
                     <div className="col-1">
-                        <button className="rounded"
-                            onClick={todoTask.deleteTodo}
+                        <button
+                            onClick={this.props.deleteTodo}
+                            className="rounded"
                         >
                             <FontAwesomeIcon icon="trash" />
                         </button>
