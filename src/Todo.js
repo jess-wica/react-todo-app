@@ -8,13 +8,22 @@ class Todo extends Component {
             <div className="row list-group-item">
                 <div className="col-9">
                     <div className="col-8">
-                        <input className="form-check-input" type="checkbox" />
-                        <label>
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            onChange={todoTask.toggleChecked}
+                        />
+                        <label
+                            style={{
+                                textDecoration: todoTask.complete ? 'line-through' : ''
+                            }}>
                             {todoTask.task}
                         </label>
                     </div>
                     <div className="col-1">
-                        <button className="rounded">
+                        <button className="rounded"
+                            onClick={todoTask.deleteTodo}
+                        >
                             <FontAwesomeIcon icon="trash" />
                         </button>
                     </div>

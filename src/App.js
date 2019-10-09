@@ -12,7 +12,12 @@ const TodoList = (props) => (
   <div className="container-fluid py-3">
     <h2>My List</h2>
     <div className="col-md-auto list-group">
-      {props.todoTasks.map(todoTask => <Todo key={todoTask.id} {...todoTask} />)}
+      {props.todoTasks.map(todoTask =>
+        <Todo
+          key={todoTask.id}
+          toggleChecked={() => this.toggleChecked(todoTask.id)}
+          deleteToDo={() => this.deleteToDo(todoTask.id)}
+          {...todoTask} />)}
     </div>
   </div>
 );
@@ -34,6 +39,28 @@ class App extends Component {
       todoTasks: [todo, ...this.state.todoTasks]
     });
   };
+
+  toggleChecked = (id) => {
+    this.setState(state => ({
+      todoTasks: state.todoTasks.map(todoTask => {
+        if (todoTask.id === id) {
+          return {
+            ...todoTask,
+            complete: !todoTask.complete
+          };
+        } else {
+          return todoTask;
+        }
+      })
+    }));
+  };
+
+  deleteToDo = (id) => {
+    this.setState({
+      todoTasks: this.state.todoTasks.filter(todoTask => todoTask.id !== id)
+    });
+    console.log(id);
+  }
 
   render() {
     const haveTodos = (this.state.todoTasks === undefined || this.state.todoTasks < 1);
