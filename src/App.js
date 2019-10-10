@@ -4,23 +4,24 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import TodoForm from './TodoForm';
-import TodoList from './TodoList';
-// import Todo from './Todo';
+import Todo from './Todo';
 
 library.add(faTrash, faPlus);
 
-// const TodoList = (props) => (
-//   <div className="container-fluid py-3">
-//     <h2>My List</h2>
-//     <div className="col-md-auto list-group">
-//       {props.todoTasks.map(todoTask =>
-//         <Todo
-//           key={todoTask.id}
-//           {...todoTask}
-//         />)}
-//     </div>
-//   </div>
-// );
+const TodoList = (props) => (
+  <div className="container-fluid py-3">
+    <h2>My List</h2>
+    <div className="col-md-auto list-group">
+      {props.todoTasks.map(todoTask =>
+        <Todo
+          key={todoTask.id}
+          {...todoTask}
+          onToggleChecked={() => props.onToggleChecked}
+          onDeleteClick={() => props.onDeleteClick}
+        />)}
+    </div>
+  </div>
+);
 
 class App extends Component {
   // constructor(props) {
@@ -30,14 +31,12 @@ class App extends Component {
   //   };
 
   // This is a shorter way of doing the same as above
+  // state = {
+  //   todoTasks: [],
+  // };
+
   state = {
     todoTasks: [],
-  };
-
-  addNewTodo = (todo) => {
-    this.setState({
-      todoTasks: [todo, ...this.state.todoTasks]
-    });
   };
 
   toggleChecked = (id) => {
@@ -59,11 +58,25 @@ class App extends Component {
     // this.setState({
     //   todoTasks: this.state.todoTasks.filter(todoTask => todoTask.id !== id)
     // });
+    console.log("It's been clicked!!!");
+    console.log(id);
     const todoTasks = this.state.todoTasks.filter(todo => {
       return todo.id !== id
-    })
-    this.setState({ todoTasks })
+    });
+    console.log(todoTasks);
+    this.setState({ todoTasks: todoTasks });
+    console.log(todoTasks.length);
   }
+
+  addNewTodo = (todo) => {
+
+    console.log(this.state);
+    this.setState({
+      todoTasks: [todo, ...this.state.todoTasks]
+    });
+    console.log(this.state.todoTasks.length);
+  };
+
 
   render() {
     const haveTodos = (this.state.todoTasks === undefined || this.state.todoTasks < 1);
@@ -75,8 +88,8 @@ class App extends Component {
           <p>Add something to do!</p> :
           <TodoList
             todoTasks={this.state.todoTasks}
-            deleteToDo={this.deleteToDo}
-            callback={this.toggleChecked}
+            onToggleChecked={() => this.toggleChecked}
+            onDeleteClick={() => this.deleteToDo}
           />}
       </div>
     )
