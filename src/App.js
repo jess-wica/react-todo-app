@@ -88,10 +88,6 @@ export default class App extends Component {
 //   //   todoTasks: [],
 //   // };
 
-//   state = {
-//     todoTasks: [],
-//   };
-
 //   toggleChecked = (id) => {
 //     this.setState(state => ({
 //       todoTasks: state.todoTasks.map(todoTask => {
@@ -120,16 +116,6 @@ export default class App extends Component {
 //     this.setState({ todoTasks: todoTasks });
 //     console.log(todoTasks.length);
 //   }
-
-//   addNewTodo = (todo) => {
-
-//     console.log(this.state);
-//     this.setState({
-//       todoTasks: [todo, ...this.state.todoTasks]
-//     });
-//     console.log(this.state.todoTasks.length);
-//   };
-
 
 //   render() {
 //     const haveTodos = (this.state.todoTasks === undefined || this.state.todoTasks < 1);
