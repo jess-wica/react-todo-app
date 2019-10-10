@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import shortid from 'shortid';
 
 // import TodoForm from './TodoForm';
 // import Todo from './Todo';
@@ -40,7 +41,11 @@ export default class App extends Component {
   createNewToDo = (todo) => {
     this.setState({
       todoTasks: [todo, ...this.state.todoTasks,
-        { task: this.state.newItemText, complete: false }]
+        {
+          id: shortid.generate(),
+          task: this.state.newItemText,
+          complete: false
+        }]
     })
   }
 
