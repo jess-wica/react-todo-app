@@ -51,34 +51,40 @@ export default class App extends Component {
 
   todoRows = () => this.state.todoTasks.map(todo =>
     <tr key={todo.id}>
-      <td>{todo.task}</td>
+      <td>
+        <input className="mr-1" type="checkbox" />
+        {todo.task}
+      </td>
     </tr>);
 
   render = () =>
-    <>
-      <div>{this.state.userName}'s To Do List</div>
-      <div className="my-1">
-        <input type="text"
-          className="form-control"
-          value={this.state.newItemText}
-          onChange={this.updateNewTextValue}
-          placeholder="Enter a task..."
-          required />
-        <button
-          onClick={this.createNewToDo}
-          className="btn btn-primary">
-          <FontAwesomeIcon icon="plus" />
-        </button>
+    <div>
+      <h4 className="p-2 text-center">{this.state.userName}'s To Do List</h4>
+
+      <div className="container-fluid">
+        <div className="my-1">
+          <input type="text"
+            className="form-control"
+            value={this.state.newItemText}
+            onChange={this.updateNewTextValue}
+            placeholder="Enter a task..."
+            required />
+          <button
+            onClick={this.createNewToDo}
+            className="btn btn-primary">
+            <FontAwesomeIcon icon="plus" />
+          </button>
+        </div>
+        <table className="table table-striped table-bordered">
+          <thead>
+            <tr><th>Outstanding Tasks</th></tr>
+          </thead>
+          <tbody>
+            {this.todoRows()}
+          </tbody>
+        </table>
       </div>
-      <table className="table table-striped table-bordered">
-        <thead>
-          <tr><th>Outstanding Tasks</th></tr>
-        </thead>
-        <tbody>
-          {this.todoRows()}
-        </tbody>
-      </table>
-    </>
+    </div>
 }
 
 // class App extends Component {
@@ -139,5 +145,3 @@ export default class App extends Component {
 //     )
 //   }
 // }
-
-// export default App;
