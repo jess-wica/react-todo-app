@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // import TodoForm from './TodoForm';
 // import Todo from './Todo';
@@ -26,15 +27,27 @@ library.add(faTrash, faPlus);
 export default class App extends Component {
   state = {
     userName: 'Jess',
-    todoTasks: [{ task: "Learn React", complete: false },
-    { task: "Take over the world", complete: false },
-    { task: "Fire Mark Zuckerberg", complete: false }],
+    todoTasks: [{ id: 1, task: "Learn React", complete: false },
+    { id: 2, task: "Take over the world", complete: false },
+    { id: 3, task: "Fire Mark Zuckerberg", complete: false }],
     newItemText: ""
   }
 
   updateNewTextValue = (event) => {
     this.setState({ newItemText: event.target.value });
   }
+
+  createNewToDo = (todo) => {
+    this.setState({
+      todoTasks: [todo, ...this.state.todoTasks,
+        { task: this.state.newItemText, complete: false }]
+    })
+  }
+
+  todoRows = () => this.state.todoTasks.map(todo =>
+    <tr key={todo.id}>
+      <td>{todo.task}</td>
+    </tr>);
 
   render = () =>
     <>
@@ -46,7 +59,20 @@ export default class App extends Component {
           onChange={this.updateNewTextValue}
           placeholder="Enter a task..."
           required />
+        <button
+          onClick={this.createNewToDo}
+          className="btn btn-primary">
+          <FontAwesomeIcon icon="plus" />
+        </button>
       </div>
+      <table className="table table-striped table-bordered">
+        <thead>
+          <tr><th>Outstanding Tasks</th></tr>
+        </thead>
+        <tbody>
+          {this.todoRows()}
+        </tbody>
+      </table>
     </>
 }
 
