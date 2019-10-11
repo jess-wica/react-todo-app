@@ -29,7 +29,7 @@ export default class App extends Component {
   }
 
   toggleTodo = (todo) => this.setState({
-    todoTasks: this.state.todoTasks.map(item => item.task === todo.task
+    todoTasks: this.state.todoTasks.map(item => item.id === todo.id
       ? { ...item, complete: !item.complete } : item)
   });
 
