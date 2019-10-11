@@ -43,35 +43,38 @@ export default class App extends Component {
     });
   }
 
-
+  toggleTodo = (todo) => this.setState({
+    todoTasks: this.state.todoTasks.map(item => item.task === todo.task
+      ? { ...item, complete: !item.complete } : item)
+  });
 
   todoRows = () => this.state.todoTasks.map(todo =>
     <tr key={todo.id}>
       <td>
         <input className="mr-1" type="checkbox" checked={todo.complete}
-          // onChange={() => this.toggleTodo(todo)} />
-          {todo.task}
+          onChange={() => this.toggleTodo(todo)} />
+        {todo.task}
       </td>
     </tr>);
-  
-    render = () =>
-    <div>
-        <h4 className="p-2 text-center">{this.state.userName}'s To Do List</h4>
 
-        <div className="container-fluid">
-          <TodoForm callback={this.createNewToDo} />
-          <table className="table table-striped table-bordered">
-            <thead>
-              <tr><th>Outstanding Tasks</th></tr>
-            </thead>
-            <tbody>
-              {this.todoRows()}
-            </tbody>
-          </table>
-        </div>
+  render = () =>
+    <div>
+      <h4 className="p-2 text-center">{this.state.userName}'s To Do List</h4>
+
+      <div className="container-fluid">
+        <TodoForm callback={this.createNewToDo} />
+        <table className="table table-striped table-bordered">
+          <thead>
+            <tr><th>Outstanding Tasks</th></tr>
+          </thead>
+          <tbody>
+            {this.todoRows()}
+          </tbody>
+        </table>
       </div>
-      }
-      
+    </div>
+}
+
 // class App extends Component {
 //   // constructor(props) {
 //   //   super(props);
