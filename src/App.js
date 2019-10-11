@@ -72,21 +72,3 @@ export default class App extends Component {
 //   // state = {
 //   //   todoTasks: [],
 //   // };
-
-//   render() {
-//     const haveTodos = (this.state.todoTasks === undefined || this.state.todoTasks < 1);
-//     return (
-//       <div className="container-fluid">
-//         <h1>My To Do List</h1>
-//         <TodoForm onSubmit={this.addNewTodo} />
-//         {haveTodos ?
-//           <p>Add something to do!</p> :
-//           <TodoList
-//             todoTasks={this.state.todoTasks}
-//             onToggleChecked={() => this.toggleChecked}
-//             onDeleteClick={() => this.deleteToDo}
-//           />}
-//       </div>
-//     )
-//   }
-// }
