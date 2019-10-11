@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import shortid from 'shortid';
 
-// import TodoForm from './TodoForm';
+import { TodoForm } from './TodoForm';
 // import Todo from './Todo';
 
 library.add(faTrash, faPlus);
@@ -30,63 +29,49 @@ export default class App extends Component {
     userName: 'Jess',
     todoTasks: [{ id: 1, task: "Learn React", complete: false },
     { id: 2, task: "Take over the world", complete: false },
-    { id: 3, task: "Fire Mark Zuckerberg", complete: false }],
-    newItemText: ""
+    { id: 3, task: "Fire Mark Zuckerberg", complete: false }]
   }
 
-  updateNewTextValue = (event) => {
-    this.setState({ newItemText: event.target.value });
-  }
-
-  createNewToDo = (todo) => {
+  createNewToDo = (task) => {
     this.setState({
-      todoTasks: [todo, ...this.state.todoTasks,
-        {
-          id: shortid.generate(),
-          task: this.state.newItemText,
-          complete: false
-        }]
-    })
+      todoTasks: [...this.state.todoTasks,
+      {
+        id: shortid.generate(),
+        task: task,
+        complete: false
+      }]
+    });
   }
+
+
 
   todoRows = () => this.state.todoTasks.map(todo =>
     <tr key={todo.id}>
       <td>
-        <input className="mr-1" type="checkbox" />
-        {todo.task}
+        <input className="mr-1" type="checkbox" checked={todo.complete}
+          // onChange={() => this.toggleTodo(todo)} />
+          {todo.task}
       </td>
     </tr>);
-
-  render = () =>
+  
+    render = () =>
     <div>
-      <h4 className="p-2 text-center">{this.state.userName}'s To Do List</h4>
+        <h4 className="p-2 text-center">{this.state.userName}'s To Do List</h4>
 
-      <div className="container-fluid">
-        <div className="my-1">
-          <input type="text"
-            className="form-control"
-            value={this.state.newItemText}
-            onChange={this.updateNewTextValue}
-            placeholder="Enter a task..."
-            required />
-          <button
-            onClick={this.createNewToDo}
-            className="btn btn-primary">
-            <FontAwesomeIcon icon="plus" />
-          </button>
+        <div className="container-fluid">
+          <TodoForm callback={this.createNewToDo} />
+          <table className="table table-striped table-bordered">
+            <thead>
+              <tr><th>Outstanding Tasks</th></tr>
+            </thead>
+            <tbody>
+              {this.todoRows()}
+            </tbody>
+          </table>
         </div>
-        <table className="table table-striped table-bordered">
-          <thead>
-            <tr><th>Outstanding Tasks</th></tr>
-          </thead>
-          <tbody>
-            {this.todoRows()}
-          </tbody>
-        </table>
       </div>
-    </div>
-}
-
+      }
+      
 // class App extends Component {
 //   // constructor(props) {
 //   //   super(props);
