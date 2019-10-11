@@ -5,24 +5,9 @@ import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import shortid from 'shortid';
 
 import { TodoForm } from './TodoForm';
-// import Todo from './Todo';
+import { TodoRow } from './TodoRow';
 
 library.add(faTrash, faPlus);
-
-// const TodoList = (props) => (
-//   <div className="container-fluid py-3">
-//     <h2>My List</h2>
-//     <div className="col-md-auto list-group">
-//       {props.todoTasks.map(todoTask =>
-//         <Todo
-//           key={todoTask.id}
-//           {...todoTask}
-//           onToggleChecked={() => props.onToggleChecked}
-//           onDeleteClick={() => props.onDeleteClick}
-//         />)}
-//     </div>
-//   </div>
-// );
 
 export default class App extends Component {
   state = {
@@ -49,15 +34,10 @@ export default class App extends Component {
   });
 
   todoRows = () => this.state.todoTasks.map(todo =>
-    <tr key={todo.id}>
-      <td style={{
-        textDecoration: todo.complete ? 'line-through' : ''
-      }}>
-        <input className="mr-1" type="checkbox" checked={todo.complete}
-          onChange={() => this.toggleTodo(todo)} />
-        {todo.task}
-      </td>
-    </tr>);
+    <TodoRow key={todo.id} todo={todo} callback={this.toggleTodo} />);
+
+  haveTodos = () =>
+    this.state.todoTasks === undefined || this.state.todoTasks < 1;
 
   render = () =>
     <div>
@@ -69,9 +49,7 @@ export default class App extends Component {
           <thead>
             <tr><th>Outstanding Tasks</th></tr>
           </thead>
-          <tbody>
-            {this.todoRows()}
-          </tbody>
+          <tbody>{this.todoRows()}</tbody>
         </table>
       </div>
     </div>
@@ -88,21 +66,6 @@ export default class App extends Component {
 //   // state = {
 //   //   todoTasks: [],
 //   // };
-
-//   toggleChecked = (id) => {
-//     this.setState(state => ({
-//       todoTasks: state.todoTasks.map(todoTask => {
-//         if (todoTask.id === id) {
-//           return {
-//             ...todoTask,
-//             complete: !todoTask.complete
-//           };
-//         } else {
-//           return todoTask;
-//         }
-//       })
-//     }));
-//   };
 
 //   deleteToDo = (id) => {
 //     // this.setState({
