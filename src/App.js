@@ -33,8 +33,14 @@ export default class App extends Component {
       ? { ...item, complete: !item.complete } : item)
   });
 
+  deleteToDo = (id) => {
+    this.setState({
+      todoTasks: this.state.todoTasks.filter(todoTask => todoTask.id !== id)
+    });
+  }
+
   todoRows = () => this.state.todoTasks.map(todo =>
-    <TodoRow key={todo.id} todo={todo} callback={this.toggleTodo} />);
+    <TodoRow key={todo.id} todo={todo} callback={this.toggleTodo} onDeleteClick={this.deleteToDo} />);
 
   haveTodos = () =>
     this.state.todoTasks === undefined || this.state.todoTasks < 1;
@@ -46,7 +52,7 @@ export default class App extends Component {
       <div className="container-fluid">
         <TodoForm callback={this.createNewToDo} />
         <table className="table table-striped table-bordered">
-          <thead>
+          <thead className="text-center">
             <tr><th>Outstanding Tasks</th></tr>
           </thead>
           <tbody>{this.todoRows()}</tbody>
@@ -66,20 +72,6 @@ export default class App extends Component {
 //   // state = {
 //   //   todoTasks: [],
 //   // };
-
-//   deleteToDo = (id) => {
-//     // this.setState({
-//     //   todoTasks: this.state.todoTasks.filter(todoTask => todoTask.id !== id)
-//     // });
-//     console.log("It's been clicked!!!");
-//     console.log(id);
-//     const todoTasks = this.state.todoTasks.filter(todo => {
-//       return todo.id !== id
-//     });
-//     console.log(todoTasks);
-//     this.setState({ todoTasks: todoTasks });
-//     console.log(todoTasks.length);
-//   }
 
 //   render() {
 //     const haveTodos = (this.state.todoTasks === undefined || this.state.todoTasks < 1);

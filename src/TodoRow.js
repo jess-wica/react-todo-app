@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export class TodoRow extends Component {
     render = () =>
@@ -13,6 +14,11 @@ export class TodoRow extends Component {
                     onChange={() => this.props.callback(this.props.todo)}
                 />
                 {this.props.todo.task}
+                <button className="btn btn-primary mr-1 float-right"
+                    onClick={() => this.props.onDeleteClick(this.props.todo.id)}
+                >
+                    <FontAwesomeIcon icon="trash" />
+                </button>
             </td>
         </tr>
 }
