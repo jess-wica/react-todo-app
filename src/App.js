@@ -50,7 +50,9 @@ export default class App extends Component {
 
   todoRows = () => this.state.todoTasks.map(todo =>
     <tr key={todo.id}>
-      <td>
+      <td style={{
+        textDecoration: todo.complete ? 'line-through' : ''
+      }}>
         <input className="mr-1" type="checkbox" checked={todo.complete}
           onChange={() => this.toggleTodo(todo)} />
         {todo.task}
